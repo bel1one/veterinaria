@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CitaController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [CitaController::class, 'index'])->name("citas.index");
