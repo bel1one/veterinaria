@@ -65,4 +65,44 @@ public function create(Request $request)
    }
 
    
+   public function edit($id)
+   {
+    
+       $cita = Cita::findOrFail($id); 
+       return view('citas.edit', compact('cita')); 
+       
+   }
+
+   public function update(Request $request, $id)
+   {
+   
+    
+       try {
+           DB::beginTransaction();
+           $cita = Cita::findOrFail($id); 
+           $request->validate([
+            'mascota' => 'required',
+            'fecha' => 'required',  
+             'hora' => 'required', 
+            'motivo' => 'required',
+            'veterinario' => 'required',
+        ]);
+           $cita->update([
+               'mascota' => $request->input('mascota'),
+               'fecha' => $request->input('fecha'),
+               'hora' => $request->input('hora'),
+               'motivo' => $request->input('motivo'),
+               'veterinario' => $request->input('veterinario'),
+               'observaciones' => $request->input('observaciones'),
+           ]);
+
+           DB::commit();
+           return redirect()->route('citas.index')->with('msn_success', 'Cita actualizada con éxito');
+       } catch (\Exception $e) {
+           DB::rollBack();
+           $fechaHoraActual = date("Y-m-d H:i:s");
+           $mensaje = $fechaHoraActual . " Error al actualizar cita: ";
+           return redirect()->route('citas.edit', $id)->with('msn_error', $mensaje . ' ' . $e->getMessage());
+       }
+   }
 }

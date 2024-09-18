@@ -49,7 +49,7 @@
                     <td>{{ $cita->observaciones }}</td>
 
                     <td class="d-flex">
-                        <a href="{{-- route('citas.edit',[$cita->id]) --}}" class="btn btn-warning me-2">Editar</a>
+                        <a href="{{ route('citas.edit',[$cita->id]) }}" class="btn btn-warning me-2">Editar</a>
                         <form onsubmit='confirmaEliminarEquipo(event)' action="{{-- route('citas.destroy', [$cita->id]) --}}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
