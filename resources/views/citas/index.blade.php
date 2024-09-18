@@ -16,7 +16,7 @@
 
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <a class="btn btn-success" href="{{-- route('citas.create') --}}">Registrar</a>
+        <a class="btn btn-success" href="{{ route('citas.create') }}">Registrar</a>
         <div class="table-search">
             <input type="search" class="form-control" placeholder="Buscar" style="width: 250px;">
             <i class="ri-search-line" id="search" style="cursor:pointer;"></i>
@@ -49,7 +49,7 @@
                     <td>{{ $cita->observaciones }}</td>
 
                     <td class="d-flex">
-                        <a href="{{ route('citas.edit',[$cita->id]) }}" class="btn btn-warning me-2">Editar</a>
+                        <a href="{{-- route('citas.edit',[$cita->id]) --}}" class="btn btn-warning me-2">Editar</a>
                         <form onsubmit='confirmaEliminarEquipo(event)' action="{{-- route('citas.destroy', [$cita->id]) --}}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
