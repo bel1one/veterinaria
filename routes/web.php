@@ -8,4 +8,4 @@ Route::get('/citas/create', [CitaController::class, 'create'])->name("citas.crea
 Route::post('citas', [CitaController::class, 'store'])->name("citas.store");
 Route::get('/citas/{cita}/edit', [CitaController::class, 'edit'])->name('citas.edit');
 Route::put('/citas/{cita}', [CitaController::class, 'update'])->name('citas.update');
-
+Route::delete('/citas/{id}', [CitaController::class, 'destroy'])->name('citas.destroy');

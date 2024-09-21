@@ -105,4 +105,24 @@ public function create(Request $request)
            return redirect()->route('citas.edit', $id)->with('msn_error', $mensaje . ' ' . $e->getMessage());
        }
    }
+   public function destroy($id)
+{
+    try {
+        DB::beginTransaction();
+
+        $cita = Cita::findOrFail($id);
+    
+        $cita->delete();
+        
+        DB::commit();
+
+        return redirect()->route('citas.index')->with('msn_success', 'Cita eliminada correctamente.');
+    } catch (\Exception $e) {
+        DB::rollBack();
+        $fechaHoraActual = date("Y-m-d H:i:s");
+        $mensaje = $fechaHoraActual . " Error al eliminar la cita: ";
+        return redirect()->route('citas.index')->with('msn_error', $mensaje . ' ' . $e->getMessage());
+    }
+}
+
 }
