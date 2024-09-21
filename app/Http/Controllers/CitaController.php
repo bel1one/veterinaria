@@ -9,11 +9,19 @@ use Illuminate\Support\Facades\DB;
 
 class CitaController extends Controller
 {
-    public function index(){
-        
+    public function index(Request $request)
+{
+    $query = $request->input('search');
+    $field = $request->input('field', 'mascota'); // Por defecto, buscar en 'mascota'
+
+    if ($query) {
+        $citas = Cita::where($field, 'like', "%$query%")->paginate(10);
+    } else {
         $citas = Cita::paginate(10);
-        return view('citas.index', compact('citas'));
-        }
+    }
+
+    return view('citas.index', compact('citas', 'field', 'query'));
+}
 
 public function create(Request $request)
      {
