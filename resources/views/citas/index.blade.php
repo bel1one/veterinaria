@@ -17,10 +17,22 @@
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <a class="btn btn-success" href="{{ route('citas.create') }}">Registrar</a>
-        <div class="table-search">
-            <input type="search" class="form-control" placeholder="Buscar" style="width: 250px;">
-            <i class="ri-search-line" id="search" style="cursor:pointer;"></i>
-        </div>
+     
+        <form method="GET" action="{{ route('citas.index') }}">
+        <div class="input-group">
+                    <select name="field" class="form-control">
+                        <option value="mascota" {{ $field === 'mascota' ? 'selected' : '' }}>Mascota</option>
+                        <option value="fecha" {{ $field === 'fecha' ? 'selected' : '' }}>Fecha</option>
+                        <option value="motivo" {{ $field === 'motivo' ? 'selected' : '' }}>Motivo</option>
+                        <option value="Veterinario" {{ $field === 'veterinario' ? 'selected' : '' }}>Veterinario</option>
+
+
+                        <!-- Añade más opciones según los campos de tu modelo -->
+                    </select>
+                    <input type="search" name="search" class="form-control" placeholder="Buscar" style="width: 200px;" value="{{ $query }}">
+                   
+                </div>
+        </form>
     </div>
 
     <div class="table-responsive w-90 mx-auto"> 
